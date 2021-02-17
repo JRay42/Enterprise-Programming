@@ -21,7 +21,7 @@ resource "azurerm_app_service_plan" "project1example" {
 }
 
 resource "azurerm_app_service" "project1example" {
-  name                = "project1-example-app-service" #CHANGEME
+  name                = "project1-app-service-jray"
   location            = azurerm_resource_group.project1.location
   resource_group_name = azurerm_resource_group.project1.name
   app_service_plan_id = azurerm_app_service_plan.project1example.id
