@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="src\img\questionguy.jpeg" />
+    <Content Include="src\img\me.jpg" />
     <Content Include="src\style\site.css" />
   </ItemGroup>
 
