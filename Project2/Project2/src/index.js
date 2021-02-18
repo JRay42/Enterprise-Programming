@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
 import './style/site.css'
-import me from './img/me.jpeg'
+import me from './img/me.jpg'
 
 var meElement = document.getElementById('me');
 if (meElement) {
