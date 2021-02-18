@@ -1,3 +1,2 @@
-﻿cd Project2
-npm run webpack
+cd Project2
 dotnet run
