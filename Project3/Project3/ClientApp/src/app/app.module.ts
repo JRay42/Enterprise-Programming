@@ -6,20 +6,18 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-// import { UserSearchComponent } from './user-search/user-search.component';
-// import { RepoSearchComponent } from './repo-search/repo-search.component';
 import { LoginComponent } from './login/login.component';
 import { GitHubSearchComponent } from './git-hub-search/git-hub-search.component';
+import { RepositoriesComponent } from './repositories/repositories.component';
 // import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    // UserSearchComponent,
-    // RepoSearchComponent,
     LoginComponent,
     GitHubSearchComponent,
+    RepositoriesComponent,
     // UsersComponent
   ],
   imports: [
@@ -29,8 +27,7 @@ import { GitHubSearchComponent } from './git-hub-search/git-hub-search.component
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: GitHubSearchComponent, pathMatch: 'full' },
-      // { path: 'UserSearch', component: UserSearchComponent },
-      // { path: 'RepoSearch', component: RepoSearchComponent },
+      { path: 'RepoSearch', component: RepositoriesComponent },
       { path: 'Login', component: LoginComponent },
     ])
   ],

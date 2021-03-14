@@ -1,5 +1,5 @@
 <h3>GitHub Search</h3>
-<form class="was-validated">
+<form class="was-validated" [formGroup]="searchForm" (ngSubmit)="gitHubSearch()">
   <div class="mb-1 pb-1">
     <div class="form-inline">
       <label class="sr-only" for="validationTextarea">Query</label>
@@ -7,58 +7,26 @@
       <div class="invalid-feedback">Please enter a User Name or Repository.</div>
     </div>
   </div>
-  <div class="form-check">
-    <input
-      type="radio"
-      class="form-check-input"
-      id="validationFormCheck1"
-      name="radio-stacked"
-      required
-    />
-    <label class="form-check-label" for="validationFormCheck1">Search Users</label>
-  </div>
-  <div class="form-check mb-1">
-    <input
-      type="radio"
-      class="form-check-input"
-      id="validationFormCheck2"
-      name="radio-stacked"
-      required
-    />
-    <label class="form-check-label" for="validationFormCheck2">Search Repositories</label>
+  <!-- For type in the radio options array -->
+  <div *ngFor="let searchLable of searchOptions">
+    <!-- Create a radio button -->
+    <div class="form-check mb-1">
+      <input
+        type="radio"
+        class="form-check-input"
+        id="validationFormCheck"
+        name="radioSearchSelection"
+        value="{{searchLable}}"
+        (change)="radioChangeHandler($event)"
+        required
+      />
+      <i>{{searchLable}}</i>
+      <label class="form-check-label" for="validationFormCheck"></label>
+    </div>
   </div>
   <div class="mb-1">
-    <button class="btn btn-primary mb-1" type="submit">Search</button>
+    <button type="submit" class="btn btn-primary mb-1">Search</button>
   </div>
 </form>
 
-
-
-<!-- <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="gitHubSearch()">
-  <div class="container">
-    <label class="sr-only" for="inlineFormInputName2">Query</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Search GitHub" formControlName="query">
-
-    <button type="submit" class="btn btn-primary mb-2">Search</button>
-  <div class="col">
-    <div class="row">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Search Users
-        </label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          Search Repositories
-        </label>
-      </div>
-    </div>
-
-  </div>
-</div>
-</form> -->
+Result: {{ result }}
