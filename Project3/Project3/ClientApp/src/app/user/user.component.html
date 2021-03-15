@@ -1,0 +1,12 @@
+<div *ngIf="user" class="card" style="width: 18rem;">
+  <img [src]="user.avatar.avatar_url" class="card-img-top" alt="user image">
+  <div class="card-body">
+    <h5 class="card-title">{{ user.login }}</h5>
+    <div class="card-text">
+      {{ user.id }}
+      <ul>
+      </ul>
+    </div>
+    <a  [routerLink]="[ '/user', user.login ]"  class="btn btn-primary">More Details</a>
+  </div>
+</div>

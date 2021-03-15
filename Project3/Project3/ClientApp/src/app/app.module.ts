@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LoginComponent } from './login/login.component';
 import { GitHubSearchComponent } from './git-hub-search/git-hub-search.component';
 import { RepositoriesComponent } from './repositories/repositories.component';
+import { UserComponent } from './user/user.component';
 // import { UsersComponent } from './users/users.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RepositoriesComponent } from './repositories/repositories.component';
     LoginComponent,
     GitHubSearchComponent,
     RepositoriesComponent,
+    UserComponent,
     // UsersComponent
   ],
   imports: [

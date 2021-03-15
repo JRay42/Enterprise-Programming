@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { User } from '../user/user';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-git-hub-search',
@@ -18,9 +20,9 @@ export class GitHubSearchComponent implements OnInit {
     'Search Repositories'
   ];
 
-  result: string;
+  result: User;
 
-  constructor() {}
+  constructor(private userService:UserService) {}
 
   ngOnInit() {
   }
@@ -33,10 +35,18 @@ export class GitHubSearchComponent implements OnInit {
   gitHubSearch() {
     var radio = this.selectedSearchType;
     console.log('Performed a gitHub search');
+    // Invoke GitHub service to fectch data from query
     if(radio == 'Search Users')
-      this.result = this.searchForm.get('query').value;
+      // Update model that's used to display result with User information
+      this.userService.gitHubSearch(this.searchForm.get('query').value)
+      .subscribe(
+        (user:User) => {
+          this.result = user;
+        }
+      );
     else
-      this.result = 'Repo Search';
+      // Update model that's used to display result with Repository information
+      this.result;
   }
 
 }
