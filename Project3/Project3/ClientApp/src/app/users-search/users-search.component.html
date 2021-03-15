@@ -1,0 +1,5 @@
+<div class="row">
+  <div class="col-3" *ngFor="let userResource of results">
+    <app-user [userLogin]="userResource.login"></app-user>
+  </div>
+</div>

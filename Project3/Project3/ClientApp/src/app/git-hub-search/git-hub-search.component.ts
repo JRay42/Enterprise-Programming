@@ -21,11 +21,11 @@ export class GitHubSearchComponent implements OnInit {
   ];
 
   result: User;
+  error: string;
 
   constructor(private userService:UserService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // Event handler for radiobutton's event change
   radioChangeHandler(event:any) {
@@ -42,6 +42,9 @@ export class GitHubSearchComponent implements OnInit {
       .subscribe(
         (user:User) => {
           this.result = user;
+        },
+        (error: any) => {
+          this.error = error;
         }
       );
     else

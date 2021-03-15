@@ -1,7 +1,5 @@
-import { UserAvatar } from "./user-avatar";
-
 export class User {
-  avatar: UserAvatar;
+  avatar_url: string;
   login: string;
   id: number;
   name: String;
