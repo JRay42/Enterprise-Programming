@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,7 +11,12 @@ import { GitHubSearchComponent } from './git-hub-search/git-hub-search.component
 import { RepositoryComponent } from './repository/repository.component';
 import { UserComponent } from './user/user.component';
 import { UsersSearchComponent } from './users-search/users-search.component';
-// import { UsersComponent } from './users/users.component';
+import { LoadingComponent } from './loading/loading.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { RepositoryDetailComponent } from './repository-detail/repository-detail.component';
+import { AuthGuard } from './login/auth.guard';
+import { AuthInterceptor } from './login/auth.interceptor';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import { UsersSearchComponent } from './users-search/users-search.component';
     RepositoryComponent,
     UserComponent,
     UsersSearchComponent,
-    // UsersComponent
+    LoadingComponent,
+    UserDetailComponent,
+    RepositoryDetailComponent,
+    // FontAwesomeModule
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,13 +38,14 @@ import { UsersSearchComponent } from './users-search/users-search.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: GitHubSearchComponent, pathMatch: 'full' },
-      { path: 'RepoSearch', component: RepositoryComponent },
-      { path: 'UserSearch', component: UsersSearchComponent },
+      { path: '', component: GitHubSearchComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'RepoSearch', component: RepositoryComponent, canActivate: [AuthGuard] },
+      { path: 'UserSearch', component: UsersSearchComponent, canActivate: [AuthGuard] },
+      { path: 'user/:login', component: UserDetailComponent, canActivate: [AuthGuard] },
       { path: 'Login', component: LoginComponent },
     ])
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

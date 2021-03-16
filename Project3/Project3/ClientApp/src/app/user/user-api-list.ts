@@ -1,8 +1,7 @@
 import { UserApiResource } from "./user-api-resource";
 
 export class UserApiList {
-  accept: string;
-  page: number;
-  per_page: number;
-  results: UserApiResource[];
+  total_count: number;
+  incomplete_results: boolean;
+  items: UserApiResource[];
 }

@@ -34,8 +34,7 @@ export class UserService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`
       );
       if (error.status === 404) {
         return throwError("Resource could not be found.");

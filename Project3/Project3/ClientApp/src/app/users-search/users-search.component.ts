@@ -18,7 +18,7 @@ export class UsersSearchComponent implements OnInit {
     this.userService.queryUsers('mike', 1, 10)
     .subscribe(
       (results:UserApiList) => {
-        this.results = results.results;
+        this.results = results.items;
       }
     )
   }

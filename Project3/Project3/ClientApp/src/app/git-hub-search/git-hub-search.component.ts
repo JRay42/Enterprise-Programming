@@ -22,6 +22,7 @@ export class GitHubSearchComponent implements OnInit {
 
   result: User;
   error: string;
+  loading: boolean;
 
   constructor(private userService:UserService) {}
 
@@ -32,7 +33,14 @@ export class GitHubSearchComponent implements OnInit {
     this.selectedSearchType = event.target.value;
   }
 
+  private resetState() {
+    this.error = null;
+    this.result = null;
+    this.loading = true;
+  }
+
   gitHubSearch() {
+    this.resetState();
     var radio = this.selectedSearchType;
     console.log('Performed a gitHub search');
     // Invoke GitHub service to fectch data from query
@@ -42,9 +50,11 @@ export class GitHubSearchComponent implements OnInit {
       .subscribe(
         (user:User) => {
           this.result = user;
+          this.loading = false;
         },
         (error: any) => {
           this.error = error;
+          this.loading = false;
         }
       );
     else
