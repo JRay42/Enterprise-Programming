@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
         (user:User) => {
           this.user = user;
         }
-      )
+      );
     }
   }
 }

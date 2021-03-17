@@ -15,7 +15,7 @@ export class LoginService {
   tokenRequestUrl = '/api/login';
 
   constructor(private http: HttpClient) {
-    this.loginUrl = `https://github.com/login/oauth/authorize?client_id=${ environment.clientId }`
+    this.loginUrl = `https://github.com/login/oauth/authorize?client_id= ${ environment.clientId }`
   }
 
   setToken(token: string) {

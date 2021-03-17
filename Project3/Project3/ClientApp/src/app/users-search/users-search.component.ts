@@ -20,6 +20,6 @@ export class UsersSearchComponent implements OnInit {
       (results:UserApiList) => {
         this.results = results.items;
       }
-    )
+    );
   }
 }

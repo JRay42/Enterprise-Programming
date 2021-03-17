@@ -16,7 +16,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { RepositoryDetailComponent } from './repository-detail/repository-detail.component';
 import { AuthGuard } from './login/auth.guard';
 import { AuthInterceptor } from './login/auth.interceptor';
-// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,14 @@ import { AuthInterceptor } from './login/auth.interceptor';
     LoadingComponent,
     UserDetailComponent,
     RepositoryDetailComponent,
-    // FontAwesomeModule
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: GitHubSearchComponent, pathMatch: 'full' },
       { path: 'RepoSearch', component: RepositoryComponent },
@@ -46,6 +48,6 @@ import { AuthInterceptor } from './login/auth.interceptor';
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
