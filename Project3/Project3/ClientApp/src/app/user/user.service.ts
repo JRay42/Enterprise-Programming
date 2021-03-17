@@ -37,7 +37,10 @@ export class UserService {
       console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`
       );
       if (error.status === 404) {
-        return throwError("Resource could not be found.");
+        return throwError("ERROR 404: Resource could not be found.");
+      }
+      if (error.status === 401) {
+        return throwError("ERROR 401: Access denied.");
       }
     }
     // return an observable with a user-facing error message

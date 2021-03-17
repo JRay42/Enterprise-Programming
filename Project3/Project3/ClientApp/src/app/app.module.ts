@@ -38,11 +38,11 @@ import { AuthInterceptor } from './login/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: GitHubSearchComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-      { path: 'RepoSearch', component: RepositoryComponent, canActivate: [AuthGuard] },
-      { path: 'UserSearch', component: UsersSearchComponent, canActivate: [AuthGuard] },
-      { path: 'user/:login', component: UserDetailComponent, canActivate: [AuthGuard] },
-      { path: 'Login', component: LoginComponent },
+      { path: '', component: GitHubSearchComponent, pathMatch: 'full' },
+      { path: 'RepoSearch', component: RepositoryComponent },
+      { path: 'UserSearch', component: UsersSearchComponent },
+      { path: 'user/:login', component: UserDetailComponent },
+      { path: 'login', component: LoginComponent },
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
