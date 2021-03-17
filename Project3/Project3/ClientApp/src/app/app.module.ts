@@ -18,6 +18,7 @@ import { AuthGuard } from './login/auth.guard';
 import { AuthInterceptor } from './login/auth.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RepositorySearchComponent } from './repository-search/repository-search.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoadingComponent,
     UserDetailComponent,
     RepositoryDetailComponent,
+    RepositorySearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,10 +42,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FontAwesomeModule,
     NgbModule,
     RouterModule.forRoot([
-      { path: '', component: GitHubSearchComponent, pathMatch: 'full' },
-      { path: 'RepoSearch', component: RepositoryComponent },
-      { path: 'UserSearch', component: UsersSearchComponent },
-      { path: 'user/:login', component: UserDetailComponent },
+      { path: '', component: GitHubSearchComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'RepoSearch', component: RepositoryComponent, canActivate: [AuthGuard] },
+      { path: 'UserSearch', component: UsersSearchComponent, canActivate: [AuthGuard] },
+      { path: 'user/:login', component: UserDetailComponent, canActivate: [AuthGuard] },
+      { path: 'repos/:full_name', component: RepositoryDetailComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
     ])
   ],

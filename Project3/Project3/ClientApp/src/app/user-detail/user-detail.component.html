@@ -2,10 +2,7 @@
   <img [src]="user.avatar_url">
   <h1><strong> {{ user.login }} - {{ user.id }} </strong></h1>
   <h3 style="color:gray"> {{ user.name }} </h3>
-  <fa-icon [icon]="mapIcon"></fa-icon>
-  <h5> {{ user.location }} </h5>
-  <fa-icon [icon]="gitHubIcon"> </fa-icon>
-  <h5> <a href="{{ user.html_url }}" style="color:indigo">GitHub</a> </h5>
-  <fa-icon [icon]="blogIcon"> </fa-icon>
-  <h5> <a href="{{ user.blog }}" style="color:indigo">Blog</a> </h5>
+  <h5> <fa-icon [icon]="mapIcon"> </fa-icon> &nbsp; {{ user.location }} </h5>
+  <h5> <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ user.html_url }}" style="color:indigo">GitHub</a> </h5>
+  <h5> <fa-icon [icon]="blogIcon"> </fa-icon> &nbsp; <a href="{{ user.blog }}" style="color:indigo">Blog</a> </h5>
 </div>

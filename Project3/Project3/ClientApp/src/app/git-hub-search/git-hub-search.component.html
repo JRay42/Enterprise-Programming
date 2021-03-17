@@ -29,9 +29,24 @@
     <button type="submit" class="btn btn-primary mb-1">Search</button>
   </div>
 </form>
-
+<!-- Error notification -->
 <div *ngIf="error" class="alert alert-danger" role="alert">
   {{error}}
 </div>
+
+<!-- Loading indicator -->
 <app-loading [loading]="loading"></app-loading>
-<app-user [user]="result"></app-user>
+
+<!-- Paging for User Search -->
+<div *ngIf="userResults" class="row">
+  <div class="col-3" *ngFor="let userResource of userResults">
+    <app-user [userLogin]="userResource.login"></app-user>
+  </div>
+</div>
+
+<!-- Paging for Repo Search -->
+<div *ngIf="repoResults" class="row">
+  <div class="col-3" *ngFor="let repoResource of repoResults">
+    <app-repository [repoName]="repoResource.full_name"></app-repository>
+  </div>
+</div>

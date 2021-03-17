@@ -8,6 +8,7 @@ import { UserService } from '../user/user.service';
   templateUrl: './users-search.component.html',
   styleUrls: ['./users-search.component.css']
 })
+
 export class UsersSearchComponent implements OnInit {
 
   results: UserApiResource[];

@@ -23,7 +23,7 @@ export class UserService {
   // https://api.github.com/search/users?q=octocat&page=0&per_page=10
   queryUsers(query: string, page: number, per_page: number): Observable<UserApiList> {
     return this.httpClient
-      .get<UserApiList>(`${this.baseApiUrl}search/users?q=${query}&page=${page}&per_page=${per_page}`)
+      .get<UserApiList>(`${this.baseApiUrl}search/users?q=${ query }&page=${ page }&per_page=${ per_page }`)
       .pipe(catchError(this.handleError));
   }
 

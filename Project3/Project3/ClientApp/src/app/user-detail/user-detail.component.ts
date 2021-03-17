@@ -10,6 +10,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css'],
 })
+
 export class UserDetailComponent implements OnInit {
 
   user: User;

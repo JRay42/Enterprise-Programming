@@ -1,1 +1,13 @@
-<p>repository works!</p>
+<div *ngIf="repo" class="card" style="width: 18rem;">
+  <img [src]="repo.owner.avatar_url" class="card-img-top" alt="Repo Image">
+  <div class="card-body">
+    <h5 class="card-title">{{ repo.name }}</h5>
+    <div class="card-text">
+         <fa-icon [icon]="openIssueIcon"> </fa-icon> &nbsp; {{ repo.open_issues_count }}
+         <fa-icon [icon]="starIcon"> </fa-icon> &nbsp; {{ repo.stargazers_count }}
+         <fa-icon [icon]="eyeIcon"> </fa-icon> &nbsp; {{ repo.watchers_count }}
+         {{ repo.language }}
+    </div>
+    <a  [routerLink]="[ '/repos', repo.full_name ]"  class="btn btn-primary">More Details</a>
+  </div>
+</div>

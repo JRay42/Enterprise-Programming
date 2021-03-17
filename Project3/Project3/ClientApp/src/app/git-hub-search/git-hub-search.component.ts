@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
+import { UserApiList } from '../user/user-api-list';
+import { UserApiResource } from '../user/user-api-resource';
+import { RepositoryApiResource } from '../repository/repository-api-resource';
+import { RepositoryService } from '../repository/repository.service';
+import { RepositoryApiList } from '../repository/repository-api-list';
 
 @Component({
   selector: 'app-git-hub-search',
@@ -20,11 +25,12 @@ export class GitHubSearchComponent implements OnInit {
     'Search Repositories'
   ];
 
-  result: User;
+  userResults: UserApiResource[];
+  repoResults: RepositoryApiResource[];
   error: string;
   loading: boolean;
 
-  constructor(private userService:UserService) {}
+  constructor(private userService:UserService, private repoService: RepositoryService) {}
 
   ngOnInit() {}
 
@@ -35,7 +41,8 @@ export class GitHubSearchComponent implements OnInit {
 
   private resetState() {
     this.error = null;
-    this.result = null;
+    this.userResults = null;
+    this.repoResults = null;
     this.loading = true;
   }
 
@@ -44,12 +51,12 @@ export class GitHubSearchComponent implements OnInit {
     var radio = this.selectedSearchType;
     console.log('Performed a gitHub search');
     // Invoke GitHub service to fectch data from query
-    if(radio == 'Search Users')
+    if(radio == 'Search Users') {
       // Update model that's used to display result with User information
-      this.userService.gitHubSearch(this.searchForm.get('query').value)
+      this.userService.queryUsers(this.searchForm.get('query').value, 0, 10)
       .subscribe(
-        (user:User) => {
-          this.result = user;
+        (userResults:UserApiList) => {
+          this.userResults = userResults.items;
           this.loading = false;
         },
         (error: any) => {
@@ -57,9 +64,20 @@ export class GitHubSearchComponent implements OnInit {
           this.loading = false;
         }
       );
-    else
+    }
+    else {
       // Update model that's used to display result with Repository information
-      this.result;
+      this.repoService.queryRepos(this.searchForm.get('query').value, 0, 10)
+      .subscribe(
+        (repoResults:RepositoryApiList) => {
+          this.repoResults = repoResults.items;
+          this.loading = false;
+        },
+        (error: any) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+    }
   }
-
 }
