@@ -9,10 +9,14 @@ export class Repository {
   open_issues_count: number;
   stargazers_count: number;
   watchers_count: number;
+  forks_count: number
   language: string;
   html_url: string;
   commits_url: string;
   issues_url: string;
   commits: RepositoryCommits[];
   issues: RepositoryIssues[];
+  created_at: string;
+  description: string;
+  clone_url: string;
 }

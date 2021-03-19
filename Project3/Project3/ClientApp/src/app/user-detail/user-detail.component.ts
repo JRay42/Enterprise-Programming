@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
-import { faBlog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBlog, faDatabase, faStar, faExclamationCircle, faLanguage } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { UserFollowerDetails } from '../user/user-follower-details';
 import { UserRepoDetails } from '../user/user-repo-details';
@@ -22,8 +22,10 @@ export class UserDetailComponent implements OnInit {
   userRepo: RepositoryApiResource[];
   blogIcon = faBlog;
   gitHubIcon = faGithub;
-  mapIcon = faMapMarkerAlt;
-
+  databaseIcon = faDatabase;
+  starIcon = faStar;
+  openIssueIcon = faExclamationCircle;
+  languageIcon = faLanguage;
   constructor(private route: ActivatedRoute, private userService:UserService) { }
 
   ngOnInit() {

@@ -14,4 +14,5 @@ export class User {
   followers_url: string;
   followers: UserFollowers[];
   repos: UserRepos[];
+  created_at: Date;
 }

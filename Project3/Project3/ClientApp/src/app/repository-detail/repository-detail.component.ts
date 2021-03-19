@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Repository } from '../repository/repository';
 import { RepositoryService } from '../repository/repository.service';
-import { faEye, faStar, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faStar, faExclamationCircle, faDownload, faCodeBranch, faComments, faFileAlt, faHistory, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { RepositoryCommitDetails } from '../repository/repository-commit-details';
 import { RepositoryIssueDetails } from '../repository/repository-issue-details';
@@ -22,6 +22,12 @@ export class RepositoryDetailComponent implements OnInit {
   starIcon = faStar;
   openIssueIcon = faExclamationCircle;
   gitHubIcon = faGithub;
+  downloadIcon = faDownload;
+  forkIcon = faCodeBranch;
+  commentsIcon = faComments;
+  pageIcon = faFileAlt;
+  historyIcon = faHistory
+  userIcon = faUser;
 
   constructor(private route: ActivatedRoute, private repoService:RepositoryService) {}
 

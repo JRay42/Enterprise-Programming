@@ -1,11 +1,5 @@
-<div *ngIf="user">
-  <img [src]="user.avatar_url">
-  <h1><strong> {{ user.login }} - {{ user.id }} </strong></h1>
-  <h3 style="color:gray"> {{ user.name }} </h3>
-  <h5> <fa-icon [icon]="mapIcon"> </fa-icon> &nbsp; {{ user.location }} </h5>
-  <h5> <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ user.html_url }}" style="color:indigo">GitHub</a> </h5>
-  <h5> <fa-icon [icon]="blogIcon"> </fa-icon> &nbsp; <a href="{{ user.blog }}" style="color:indigo">Blog</a> </h5>
-  <h3>Folowers</h3>
+<h1>--- THIS IS TEST AREA --- </h1>
+<h3>Folowers</h3>
   <table *ngIf="userFollowers" class="table">
     <tr>
       <th>User</th>
@@ -27,4 +21,169 @@
       <td>{{ repo.language }}</td>
     </tr>
   </table>
-</div>
+<h1>--- END OF TEST AREA --- </h1>
+<!-- ONCE RESOLVED DELETE EVERYTHING ABOVE HERE -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>{{ user.login }}</h1></div>
+    	<div class="col-sm-2"><div class="pull-right"><img title="profile image" class="img-circle img-responsive" [src]="user.avatar_url"></div>
+    </div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Profile <i class="fa fa-link fa-1x"></i></div>
+          <ul class="list-group">
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{ user.created_at }}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>ID#</strong></span> {{ user.id }}</li>
+            <li *ngIf="user.name" class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> {{ user.name }}</li>
+            <li *ngIf="user.location" class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> {{ user.location }}</li>
+          </ul>
+        </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">WebLinks <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body">
+              <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ user.html_url }}" style="color:indigo">GitHub</a>
+            </div>
+            <div *ngIf="user.blog" class="panel-body">
+              <fa-icon [icon]="blogIcon"> </fa-icon> &nbsp; <a href="{{ user.blog }}" style="color:indigo">Blog</a>
+            </div>
+          </div>
+
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Activity <i class="fa fa-link fa-1x"></i></div>
+            <ul class="list-group">
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+            </ul>
+          </div>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#repositories" data-toggle="tab">Repositories</a></li>
+            <li><a href="#followers" data-toggle="tab">Followers</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="repositories">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th><fa-icon [icon]="databaseIcon"> </fa-icon> RepoName</th>
+                      <th><fa-icon [icon]="starIcon"> </fa-icon> Stargazers</th>
+                      <th><fa-icon [icon]="openIssueIcon"> </fa-icon> Open Issues</th>
+                      <th><fa-icon [icon]="languageIcon"> </fa-icon> Language</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr>
+                      <td>1</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                     <tr>
+                      <td>8</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>9</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>10</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4 text-center">
+                  	<ul class="pagination" id="myPager"></ul>
+                  </div>
+                </div>
+              </div><!--/table-resp-->
+              <hr>
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="followers">
+               <h2></h2>
+               <ul class="list-group">
+                  <li class="list-group-item text-muted">Inbox</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                </ul>
+          </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->

@@ -1,7 +1,142 @@
-<div *ngIf="repo">
-  <h1><strong> {{ repo.name }} by {{ repo.owner.login }} </strong></h1>
-  <h3 style="color:gray"> {{ repo.name }} </h3>
-  <h5> <fa-icon [icon]="eyeIcon"> </fa-icon> &nbsp; {{ repo.stargazers_count }} </h5>
-  <h5> <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; {{ repo.html_url }} </h5>
-  <h5> <fa-icon [icon]="starIcon"> </fa-icon> &nbsp; {{ repo.watchers_count }} </h5>
-</div>
+<h1>--- THIS IS TEST AREA --- </h1>
+
+<h1>--- END OF TEST AREA --- </h1>
+<!-- ONCE RESOLVED DELETE EVERYTHING ABOVE HERE -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>{{ repo.name }}</h1></div>
+    	<div class="col-sm-2"><div class="pull-right"><a class="btn btn-lg btn-primary" [href]="repo.clone_url"><fa-icon [icon]="downloadIcon"></fa-icon> Clone </a></div>
+    </div>
+
+
+
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Profile <i class="fa fa-link fa-1x"></i></div>
+          <ul class="list-group">
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Owner</strong></span> {{ repo.owner.login }}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Created</strong></span> {{ repo.created_at }}</li>
+            <li *ngIf="repo.language" class="list-group-item text-right"><span class="pull-left"><strong>Language</strong></span> {{ repo.language }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="repo.description" class="panel panel-default">
+          <div class="panel-heading">Repo Description<i class="fa fa-link fa-1x"></i></div>
+          <div class="panel-body">
+            <div>{{ repo.description }}</div>
+          </div>
+        </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">WebLinks <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body">
+              <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ repo.html_url }}" style="color:indigo">GitHub Repository</a>
+            </div>
+            <div *ngIf="repo.owner.html_url" class="panel-body">
+              <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ repo.owner.html_url }}" style="color:indigo">GitHub Profile</a>
+            </div>
+          </div>
+
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Activity <i class="fa fa-link fa-1x"></i></div>
+            <ul class="list-group">
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Stargazers</strong></span><fa-icon [icon]="starIcon"> </fa-icon> {{ repo.stargazers_count }} </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Watchers</strong></span><fa-icon [icon]="eyeIcon"> </fa-icon> {{ repo.watchers_count }} </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Forks</strong></span><fa-icon [icon]="forkIcon"> </fa-icon> {{ repo.forks_count }} </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong>Open Issues</strong></span><fa-icon [icon]="openIssueIcon"> </fa-icon> {{ repo.open_issues_count }} </li>
+            </ul>
+          </div>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#commits" data-toggle="tab">Commits</a></li>
+            <li><a href="#issues" data-toggle="tab">Issues</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="commits">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th><fa-icon [icon]="userIcon"> </fa-icon> Author </th>
+                      <th><fa-icon [icon]="historyIcon"> </fa-icon> Commit </th>
+                      <th><fa-icon [icon]="pageIcon"> </fa-icon> Message </th>
+                      <th><fa-icon [icon]="commentsIcon"> </fa-icon> Comments# </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr>
+                      <td>1</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                      <td>Table cell</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4 text-center">
+                  	<ul class="pagination" id="myPager"></ul>
+                  </div>
+                </div>
+              </div><!--/table-resp-->
+              <hr>
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="issues">
+               <h2></h2>
+               <ul class="list-group">
+                  <li class="list-group-item text-muted">Inbox</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                </ul>
+          </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
