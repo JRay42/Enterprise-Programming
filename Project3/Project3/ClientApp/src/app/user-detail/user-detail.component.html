@@ -5,4 +5,26 @@
   <h5> <fa-icon [icon]="mapIcon"> </fa-icon> &nbsp; {{ user.location }} </h5>
   <h5> <fa-icon [icon]="gitHubIcon"> </fa-icon> &nbsp; <a href="{{ user.html_url }}" style="color:indigo">GitHub</a> </h5>
   <h5> <fa-icon [icon]="blogIcon"> </fa-icon> &nbsp; <a href="{{ user.blog }}" style="color:indigo">Blog</a> </h5>
+  <h3>Folowers</h3>
+  <table *ngIf="userFollowers" class="table">
+    <tr>
+      <th>User</th>
+      <th>Login</th>
+    </tr>
+    <tr *ngFor="let follower of userFollowers">
+      <td>{{ follower.avatar_url }}</td>
+      <td>{{ follower.login }}</td>
+    </tr>
+  </table>
+  <h3>Repos</h3>
+  <table *ngIf="userRepos" class="table">
+    <tr>
+      <th>Name</th>
+      <th>Language</th>
+    </tr>
+    <tr *ngFor="let repo of userRepos">
+      <td>{{ repo.name }}</td>
+      <td>{{ repo.language }}</td>
+    </tr>
+  </table>
 </div>

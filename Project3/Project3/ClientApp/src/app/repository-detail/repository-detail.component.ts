@@ -4,6 +4,8 @@ import { Repository } from '../repository/repository';
 import { RepositoryService } from '../repository/repository.service';
 import { faEye, faStar, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { RepositoryCommitDetails } from '../repository/repository-commit-details';
+import { RepositoryIssueDetails } from '../repository/repository-issue-details';
 
 @Component({
   selector: 'app-repository-detail',
@@ -14,6 +16,8 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 export class RepositoryDetailComponent implements OnInit {
 
   repo: Repository;
+  repoCommits: RepositoryCommitDetails[] = [];
+  repoIssues: RepositoryIssueDetails[] = [];
   eyeIcon = faEye;
   starIcon = faStar;
   openIssueIcon = faExclamationCircle;
@@ -27,7 +31,21 @@ export class RepositoryDetailComponent implements OnInit {
     this.repoService.gitHubSearch(repoName).subscribe(
       (repo: Repository) => {
         this.repo = repo;
+        for(var i=0; i < this.repo.commits.length; ++i) {
+          this.repoService.getCommits(this.repo.commits[i].repoCommits.author.login).subscribe(
+            (commit: RepositoryCommitDetails) => {
+              this.repoCommits.push(commit);
+            }
+          );
+        }
+        for(var i=0; i < this.repo.issues.length; ++i) {
+          this.repoService.getIssues(this.repo.issues[i].repoIssues.full_name).subscribe(
+            (issue: RepositoryIssueDetails) => {
+              this.repoIssues.push(issue);
+            }
+          );
+        }
       }
-    )
+    );
   }
 }

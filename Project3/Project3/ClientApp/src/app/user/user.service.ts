@@ -4,12 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { User } from './user';
 import { UserApiList } from './user-api-list';
 import { catchError } from "rxjs/operators";
+import { UserFollowerDetails } from './user-follower-details';
+import { UserRepoDetails } from './user-repo-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  // Base Api Url from: https://api.github.com/search/users?q={query}{&page,per_page,sort,order}
+
   private baseApiUrl: string = "https://api.github.com/";
   constructor(private httpClient: HttpClient) {}
 
@@ -24,6 +26,18 @@ export class UserService {
   queryUsers(query: string, page: number, per_page: number): Observable<UserApiList> {
     return this.httpClient
       .get<UserApiList>(`${this.baseApiUrl}search/users?q=${ query }&page=${ page }&per_page=${ per_page }`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getRepos(user: any) {
+    return this.httpClient
+      .get<UserRepoDetails>(`${this.baseApiUrl}users/${ user }/repos`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getFollowers(user: string) {
+    return this.httpClient
+      .get<UserFollowerDetails>(`${this.baseApiUrl}users/${ user }/followers`)
       .pipe(catchError(this.handleError));
   }
 

@@ -50,3 +50,22 @@
     <app-repository [repoName]="repoResource.full_name"></app-repository>
   </div>
 </div>
+
+<div class="row justify-content-center">
+  <div class="col-2">
+    <fa-icon [icon]="faChevronLeft" (click)="prev()" *ngIf="prevPageExists"></fa-icon>
+  </div>
+  <div class="col-2">
+    <fa-icon [icon]="faChevronRight" (click)="next()" *ngIf="nextPageExists"></fa-icon>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <ngb-pagination [(page)]="userPage"
+                    [pageSize]="size"
+                    [collectionSize]="count"
+                    ellipses=true
+                    maxSize=10
+                    (pageChange)="changePage($event)"></ngb-pagination>
+  </div>
+</div>

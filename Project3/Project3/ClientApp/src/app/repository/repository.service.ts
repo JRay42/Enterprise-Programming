@@ -4,12 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from "rxjs/operators";
 import { Repository } from './repository';
 import { RepositoryApiList } from './repository-api-list';
+import { RepositoryCommitDetails } from './repository-commit-details';
+import { RepositoryIssueDetails } from './repository-issue-details';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RepositoryService {
+
   // Base Api Url from: https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}
   private baseApiUrl: string = "https://api.github.com/";
   constructor(private httpClient: HttpClient) {}
@@ -25,6 +28,18 @@ export class RepositoryService {
   queryRepos(query: string, page: number, per_page: number): Observable<RepositoryApiList> {
     return this.httpClient
       .get<RepositoryApiList>(`${this.baseApiUrl}search/repositories?q=${ query }&page=${ page }&per_page=${ per_page }`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getIssues(full_name: string) {
+    return this.httpClient
+      .get<RepositoryIssueDetails>(`${this.baseApiUrl}repos/${ full_name }/issues`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getCommits(full_name: string) {
+    return this.httpClient
+      .get<RepositoryCommitDetails>(`${this.baseApiUrl}repos/${ full_name }/commits`)
       .pipe(catchError(this.handleError));
   }
 
