@@ -16,14 +16,14 @@
       <td>{{ follower.login }}</td>
     </tr>
   </table>
-  <h3>Repos</h3>
-  <table *ngIf="userRepos" class="table">
+  <h3>Repositories</h3>
+  <table *ngIf="userRepo" class="table">
     <tr>
       <th>Name</th>
       <th>Language</th>
     </tr>
-    <tr *ngFor="let repo of userRepos">
-      <td>{{ repo.name }}</td>
+    <tr *ngFor="let repo of userRepo">
+      <td>{{ userRepo }}</td>
       <td>{{ repo.language }}</td>
     </tr>
   </table>

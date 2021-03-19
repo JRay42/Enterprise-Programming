@@ -6,6 +6,8 @@ import { faBlog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { UserFollowerDetails } from '../user/user-follower-details';
 import { UserRepoDetails } from '../user/user-repo-details';
+import { RepositoryApiList } from '../repository/repository-api-list';
+import { RepositoryApiResource } from '../repository/repository-api-resource';
 
 @Component({
   selector: 'app-user-detail',
@@ -17,7 +19,7 @@ export class UserDetailComponent implements OnInit {
 
   user: User;
   userFollowers: UserFollowerDetails[] = [];
-  userRepos: UserRepoDetails[] = [];
+  userRepo: RepositoryApiResource[];
   blogIcon = faBlog;
   gitHubIcon = faGithub;
   mapIcon = faMapMarkerAlt;
@@ -31,19 +33,17 @@ export class UserDetailComponent implements OnInit {
       (user: User) => {
         this.user = user;
         for(var i=0; i < this.user.followers.length; i++) {
-          this.userService.getFollowers(this.user.followers[i].userfollowers.url).subscribe(
+          this.userService.getFollowers(this.user.followers[i].userfollowers.login).subscribe(
             (follower: UserFollowerDetails) => {
               this.userFollowers.push(follower);
             }
           );
         }
-        for(var i=0; i < this.user.repos.length; i++) {
-          this.userService.getRepos(this.user.repos[i].userRepos.login).subscribe(
-            (repo: UserRepoDetails) => {
-              this.userRepos.push(repo);
-            }
-          );
-        }
+        this.userService.getRepos(this.user.login).subscribe(
+          (userRepo: RepositoryApiList) => {
+            this.userRepo = userRepo.items;
+          }
+        );
       }
     );
   }

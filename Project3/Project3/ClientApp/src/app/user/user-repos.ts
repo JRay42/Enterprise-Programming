@@ -1,5 +1,5 @@
-import { UserApiResource } from "./user-api-resource";
+import { RepositoryApiResource } from "../repository/repository-api-resource";
 
 export class UserRepos {
-  userRepos: UserApiResource;
+  userRepos: RepositoryApiResource;
 }

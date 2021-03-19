@@ -8,4 +8,5 @@ export class RepositoryApiResource {
   stargazers_count: number;
   watchers_count: number;
   language: string;
+  name: string;
 }

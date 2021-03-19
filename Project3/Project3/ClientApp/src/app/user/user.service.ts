@@ -6,6 +6,7 @@ import { UserApiList } from './user-api-list';
 import { catchError } from "rxjs/operators";
 import { UserFollowerDetails } from './user-follower-details';
 import { UserRepoDetails } from './user-repo-details';
+import { RepositoryApiList } from '../repository/repository-api-list';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class UserService {
 
   getRepos(user: any) {
     return this.httpClient
-      .get<UserRepoDetails>(`${this.baseApiUrl}users/${ user }/repos`)
+      .get<RepositoryApiList>(`${this.baseApiUrl}users/${ user }/repos`)
       .pipe(catchError(this.handleError));
   }
 
