@@ -7,6 +7,8 @@ import { catchError } from "rxjs/operators";
 import { UserFollowerDetails } from './user-follower-details';
 import { UserRepoDetails } from './user-repo-details';
 import { RepositoryApiList } from '../repository/repository-api-list';
+import { RepositoryApiResource } from '../repository/repository-api-resource';
+import { UserApiResource } from './user-api-resource';
 
 @Injectable({
   providedIn: 'root'
@@ -30,15 +32,17 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  getRepos(user: any) {
+  getRepos(user: any):
+  Observable<RepositoryApiResource[]> {
     return this.httpClient
-      .get<RepositoryApiList>(`${this.baseApiUrl}users/${ user }/repos`)
+      .get<RepositoryApiResource[]>(`${this.baseApiUrl}users/${ user }/repos`)
       .pipe(catchError(this.handleError));
   }
 
-  getFollowers(user: string) {
+  getFollowers(user: string):
+  Observable<UserApiResource[]> {
     return this.httpClient
-      .get<UserFollowerDetails>(`${this.baseApiUrl}users/${ user }/followers`)
+      .get<UserApiResource[]>(`${this.baseApiUrl}users/${ user }/followers`)
       .pipe(catchError(this.handleError));
   }
 

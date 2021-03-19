@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
-import { faBlog, faDatabase, faStar, faExclamationCircle, faLanguage } from '@fortawesome/free-solid-svg-icons';
+import { faBlog, faDatabase, faStar, faExclamationCircle, faLanguage, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { UserFollowerDetails } from '../user/user-follower-details';
 import { UserRepoDetails } from '../user/user-repo-details';
 import { RepositoryApiList } from '../repository/repository-api-list';
 import { RepositoryApiResource } from '../repository/repository-api-resource';
+import { UserApiResource } from '../user/user-api-resource';
 
 @Component({
   selector: 'app-user-detail',
@@ -18,7 +19,7 @@ import { RepositoryApiResource } from '../repository/repository-api-resource';
 export class UserDetailComponent implements OnInit {
 
   user: User;
-  userFollowers: UserFollowerDetails[] = [];
+  userFollower: UserFollowerDetails[];
   userRepo: RepositoryApiResource[];
   blogIcon = faBlog;
   gitHubIcon = faGithub;
@@ -26,6 +27,8 @@ export class UserDetailComponent implements OnInit {
   starIcon = faStar;
   openIssueIcon = faExclamationCircle;
   languageIcon = faLanguage;
+  userCircleIcon = faUserCircle;
+
   constructor(private route: ActivatedRoute, private userService:UserService) { }
 
   ngOnInit() {
@@ -34,16 +37,15 @@ export class UserDetailComponent implements OnInit {
     this.userService.gitHubSearch(userLogin).subscribe(
       (user: User) => {
         this.user = user;
-        for(var i=0; i < this.user.followers.length; i++) {
-          this.userService.getFollowers(this.user.followers[i].userfollowers.login).subscribe(
-            (follower: UserFollowerDetails) => {
-              this.userFollowers.push(follower);
-            }
-          );
-        }
+
+        this.userService.getFollowers(this.user.login).subscribe(
+          (userFollower: UserApiResource[]) => {
+            this.userFollower = userFollower;
+          }
+        );
         this.userService.getRepos(this.user.login).subscribe(
-          (userRepo: RepositoryApiList) => {
-            this.userRepo = userRepo.items;
+          (userRepo: RepositoryApiResource[]) => {
+            this.userRepo = userRepo;
           }
         );
       }

@@ -1,5 +1,5 @@
-import { RepositoryApiResource } from "./repository-api-resource";
+import { RepositoryIssueDetails } from "./repository-issue-details";
 
 export class RepositoryIssues {
-  repoIssues: RepositoryApiResource;
+  repoIssues: RepositoryIssueDetails[];
 }

@@ -1,29 +1,3 @@
-<h1>--- THIS IS TEST AREA --- </h1>
-<h3>Folowers</h3>
-  <table *ngIf="userFollowers" class="table">
-    <tr>
-      <th>User</th>
-      <th>Login</th>
-    </tr>
-    <tr *ngFor="let follower of userFollowers">
-      <td>{{ follower.avatar_url }}</td>
-      <td>{{ follower.login }}</td>
-    </tr>
-  </table>
-  <h3>Repositories</h3>
-  <table *ngIf="userRepo" class="table">
-    <tr>
-      <th>Name</th>
-      <th>Language</th>
-    </tr>
-    <tr *ngFor="let repo of userRepo">
-      <td>{{ userRepo }}</td>
-      <td>{{ repo.language }}</td>
-    </tr>
-  </table>
-<h1>--- END OF TEST AREA --- </h1>
-<!-- ONCE RESOLVED DELETE EVERYTHING ABOVE HERE -->
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -32,12 +6,12 @@
 <div class="container bootstrap snippet">
     <div class="row">
   		<div class="col-sm-10"><h1>{{ user.login }}</h1></div>
-    	<div class="col-sm-2"><div class="pull-right"><img title="profile image" class="img-circle img-responsive" [src]="user.avatar_url"></div>
-    </div>
+    	  <div class="col-sm-2">
+          <div class="pull-left"><img title="profile image" class="img-circle img-responsive" [src]="user.avatar_url"></div>
+      </div>
     </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
-
         <div class="panel panel-default">
           <div class="panel-heading">Profile <i class="fa fa-link fa-1x"></i></div>
           <ul class="list-group">
@@ -71,10 +45,8 @@
 
         </div><!--/col-3-->
     	<div class="col-sm-9">
-
           <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#repositories" data-toggle="tab">Repositories</a></li>
-            <li><a href="#followers" data-toggle="tab">Followers</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="repositories">
@@ -82,7 +54,6 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th><fa-icon [icon]="databaseIcon"> </fa-icon> RepoName</th>
                       <th><fa-icon [icon]="starIcon"> </fa-icon> Stargazers</th>
                       <th><fa-icon [icon]="openIssueIcon"> </fa-icon> Open Issues</th>
@@ -90,75 +61,11 @@
                     </tr>
                   </thead>
                   <tbody id="items">
-                    <tr>
-                      <td>1</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                     <tr>
-                      <td>8</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
+                    <tr *ngFor="let repo of userRepo">
+                      <td><b><a [routerLink]="[ '/repos', repo.full_name ]"> {{ repo.name }} </a></b></td>
+                      <td>{{ repo.stargazers_count }}</td>
+                      <td>{{ repo.open_issues_count }}</td>
+                      <td>{{ repo.language }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -170,20 +77,40 @@
                 </div>
               </div><!--/table-resp-->
               <hr>
-             </div><!--/tab-pane-->
-             <div class="tab-pane" id="followers">
-               <h2></h2>
-               <ul class="list-group">
-                  <li class="list-group-item text-muted">Inbox</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                </ul>
+            </div><!--/tab-pane-->
+
+            <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#followers" data-toggle="tab">Followers</a></li>
+            </ul>
+          </div><!--/tab-content-->
+          <div class="tab-content">
+            <div class="tab-pane active" id="followers">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th><fa-icon [icon]="userCircleIcon"> </fa-icon> Avatar </th>
+                      <th><fa-icon [icon]="starIcon"> </fa-icon> Follower Login </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr *ngFor="let follower of userFollower">
+                      <td><img title="profile image" class="img-circle img-responsive" [src]="follower.avatar_url" style="width:50px;height:50px;"></td>
+                      <td><b><a [routerLink]="[ '/user', follower.login ]"> {{ follower.login }} </a></b></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4 text-center">
+                  	<ul class="pagination" id="myPager"></ul>
+                  </div>
+                </div>
+              </div><!--/table-resp-->
+              <hr>
+            </div><!--/tab-pane-->
           </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
+  </div>
+

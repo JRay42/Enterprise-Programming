@@ -1,8 +1,3 @@
-<h1>--- THIS IS TEST AREA --- </h1>
-
-<h1>--- END OF TEST AREA --- </h1>
-<!-- ONCE RESOLVED DELETE EVERYTHING ABOVE HERE -->
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -23,7 +18,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Profile <i class="fa fa-link fa-1x"></i></div>
           <ul class="list-group">
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Owner</strong></span> {{ repo.owner.login }}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Owner</strong></span><a  [routerLink]="[ '/user', repo.owner.login ]"><b> {{ repo.owner.login }} </b></a></li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Created</strong></span> {{ repo.created_at }}</li>
             <li *ngIf="repo.language" class="list-group-item text-right"><span class="pull-left"><strong>Language</strong></span> {{ repo.language }}</li>
           </ul>
@@ -62,7 +57,6 @@
 
           <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#commits" data-toggle="tab">Commits</a></li>
-            <li><a href="#issues" data-toggle="tab">Issues</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="commits">
@@ -70,48 +64,18 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th><fa-icon [icon]="userIcon"> </fa-icon> Author </th>
-                      <th><fa-icon [icon]="historyIcon"> </fa-icon> Commit </th>
+                      <th><fa-icon [icon]="historyIcon"> </fa-icon> Commit Link </th>
                       <th><fa-icon [icon]="pageIcon"> </fa-icon> Message </th>
                       <th><fa-icon [icon]="commentsIcon"> </fa-icon> Comments# </th>
                     </tr>
                   </thead>
                   <tbody id="items">
-                    <tr>
-                      <td>1</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
-                      <td>Table cell</td>
+                    <tr *ngFor="let commit of repoCommits">
+                      <td><b><a [routerLink]="[ '/user', commit.author.login ]"> {{ commit.author.login }} </a></b></td>
+                      <td><a href="{{ commit.html_url }}"><fa-icon [icon]="linkIcon"> </fa-icon></a></td>
+                      <td>{{ commit.message }}</td>
+                      <td>{{ commit.comment_count }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -124,19 +88,40 @@
               </div><!--/table-resp-->
               <hr>
              </div><!--/tab-pane-->
-             <div class="tab-pane" id="issues">
-               <h2></h2>
-               <ul class="list-group">
-                  <li class="list-group-item text-muted">Inbox</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                </ul>
+
+             <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#issues" data-toggle="tab">Issues</a></li>
+            </ul>
+          </div><!--/tab-content-->
+          <div class="tab-content">
+            <div class="tab-pane active" id="issues">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th><fa-icon [icon]="openIssueIcon"> </fa-icon> Issue Title </th>
+                      <th><fa-icon [icon]="calendarIcon"> </fa-icon> Created </th>
+                      <th><fa-icon [icon]="linkIcon"> </fa-icon> Issue Link </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr *ngFor="let issue of repoIssues">
+                      <td>{{ issue.title }} </td>
+                      <td> {{ issue.created_at }} </td>
+                      <td><b><a href="{{ issue.html_url }}" >Issue Link</a></b></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4 text-center">
+                  	<ul class="pagination" id="myPager"></ul>
+                  </div>
+                </div>
+              </div><!--/table-resp-->
+              <hr>
+            </div><!--/tab-pane-->
           </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
+  </div>

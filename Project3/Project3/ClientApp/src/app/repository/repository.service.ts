@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from "rxjs/operators";
 import { Repository } from './repository';
 import { RepositoryApiList } from './repository-api-list';
+import { RepositoryApiResource } from './repository-api-resource';
 import { RepositoryCommitDetails } from './repository-commit-details';
 import { RepositoryIssueDetails } from './repository-issue-details';
 
@@ -31,15 +32,17 @@ export class RepositoryService {
       .pipe(catchError(this.handleError));
   }
 
-  getIssues(full_name: string) {
+  getIssues(full_name: string):
+  Observable<RepositoryIssueDetails[]> {
     return this.httpClient
-      .get<RepositoryIssueDetails>(`${this.baseApiUrl}repos/${ full_name }/issues`)
+      .get<RepositoryIssueDetails[]>(`${this.baseApiUrl}repos/${ full_name }/issues`)
       .pipe(catchError(this.handleError));
   }
 
-  getCommits(full_name: string) {
+  getCommits(full_name: string):
+  Observable<RepositoryCommitDetails[]> {
     return this.httpClient
-      .get<RepositoryCommitDetails>(`${this.baseApiUrl}repos/${ full_name }/commits`)
+      .get<RepositoryCommitDetails[]>(`${this.baseApiUrl}repos/${ full_name }/commits`)
       .pipe(catchError(this.handleError));
   }
 

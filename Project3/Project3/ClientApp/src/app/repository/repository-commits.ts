@@ -1,5 +1,5 @@
-import { RepositoryApiResource } from "./repository-api-resource";
+import { RepositoryCommitDetails } from "./repository-commit-details";
 
 export class RepositoryCommits {
-  repoCommits: RepositoryApiResource;
+  repoCommits: RepositoryCommitDetails[];
 }
