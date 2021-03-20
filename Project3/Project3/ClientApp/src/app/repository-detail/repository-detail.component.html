@@ -107,7 +107,7 @@
                   <tbody id="items">
                     <tr *ngFor="let issue of repoIssues">
                       <td>{{ issue.title }} </td>
-                      <td> {{ issue.created_at }} </td>
+                      <td> {{ issue.created_at.substring(0, 10) }} </td>
                       <td><b><a href="{{ issue.html_url }}" >Issue Link</a></b></td>
                     </tr>
                   </tbody>

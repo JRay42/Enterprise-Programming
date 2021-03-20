@@ -32,15 +32,13 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  getRepos(user: any):
-  Observable<RepositoryApiResource[]> {
+  getRepos(user: any): Observable<RepositoryApiResource[]> {
     return this.httpClient
       .get<RepositoryApiResource[]>(`${this.baseApiUrl}users/${ user }/repos`)
       .pipe(catchError(this.handleError));
   }
 
-  getFollowers(user: string):
-  Observable<UserApiResource[]> {
+  getFollowers(user: string): Observable<UserApiResource[]> {
     return this.httpClient
       .get<UserApiResource[]>(`${this.baseApiUrl}users/${ user }/followers`)
       .pipe(catchError(this.handleError));

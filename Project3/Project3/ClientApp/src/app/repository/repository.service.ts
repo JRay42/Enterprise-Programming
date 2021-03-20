@@ -32,15 +32,13 @@ export class RepositoryService {
       .pipe(catchError(this.handleError));
   }
 
-  getIssues(full_name: string):
-  Observable<RepositoryIssueDetails[]> {
+  getIssues(full_name: string):   Observable<RepositoryIssueDetails[]> {
     return this.httpClient
       .get<RepositoryIssueDetails[]>(`${this.baseApiUrl}repos/${ full_name }/issues`)
       .pipe(catchError(this.handleError));
   }
 
-  getCommits(full_name: string):
-  Observable<RepositoryCommitDetails[]> {
+  getCommits(full_name: string): Observable<RepositoryCommitDetails[]> {
     return this.httpClient
       .get<RepositoryCommitDetails[]>(`${this.baseApiUrl}repos/${ full_name }/commits`)
       .pipe(catchError(this.handleError));

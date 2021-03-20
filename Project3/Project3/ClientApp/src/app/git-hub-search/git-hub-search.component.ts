@@ -67,6 +67,8 @@ export class GitHubSearchComponent implements OnInit {
       this.userService.queryUsers(this.searchForm.get('query').value, this.page, this.size)
       .subscribe(
         (userResults:UserApiList) => {
+          if (userResults.total_count === 0)
+          this.error = "Users not Found";
           this.nextPageExists = (this.page + 1) * this.size < userResults.total_count;
           this.userResults = userResults.items;
           this.count = userResults.total_count;
@@ -83,6 +85,8 @@ export class GitHubSearchComponent implements OnInit {
       this.repoService.queryRepos(this.searchForm.get('query').value, this.page, this.size)
       .subscribe(
         (repoResults:RepositoryApiList) => {
+          if (repoResults.total_count === 0)
+          this.error = "Repos not Found";
           this.nextPageExists = (this.page + 1) * this.size < repoResults.total_count;
           this.repoResults = repoResults.items;
           this.count = repoResults.total_count;

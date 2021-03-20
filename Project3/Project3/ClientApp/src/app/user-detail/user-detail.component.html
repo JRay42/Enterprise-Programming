@@ -15,7 +15,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Profile <i class="fa fa-link fa-1x"></i></div>
           <ul class="list-group">
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{ user.created_at }}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{ user.created_at.toString().substring(0,10) }}</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>ID#</strong></span> {{ user.id }}</li>
             <li *ngIf="user.name" class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> {{ user.name }}</li>
             <li *ngIf="user.location" class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> {{ user.location }}</li>
