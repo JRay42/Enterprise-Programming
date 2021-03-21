@@ -1,2 +1,2 @@
-cd Project3\ClientApp
-npm run start
+cd Project3
+dotnet run
