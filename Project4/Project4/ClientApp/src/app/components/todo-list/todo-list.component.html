@@ -1,0 +1,30 @@
+<input type="text" class="todo-input" placeholder="What needs to be done" [(ngModel)]="todoTask" (keyup.enter)="addTodo()">
+
+<div class="todo-item" *ngFor="let todo of todosFiltered()" @fade>
+  <div class="todo-item-left">
+    <input type="checkbox" [(ngModel)]="todo.done" (change)="doneEdit(todo)">
+    <div *ngIf="!todo.done; else todo.done" class="todo-item-label" [ngClass]="{ 'completed' : todo.done }" (dblclick)="editTodo(todo)">{{ todo.task }}</div>
+    <input *ngIf="todo.done" type="text" class="todo-item-edit" [(ngModel)]="todo.task" (blur)="doneEdit(todo)" (keyup.enter)="doneEdit(todo)" (keyup.esc)="cancelEdit(todo)" autofocus>
+  </div>
+  <div class="remove-item" (click)="deleteTodo(todo.id)">
+    &times;
+  </div>
+</div>
+
+<div class="extra-container">
+  <div><label><input type="checkbox" (change)="checkAllTodos()"  [(ngModel)]="!remainingModels"> Check All</label></div>
+  <div>{{ remaining() }} items left</div>
+</div>
+
+<div class="extra-container">
+  <div>
+    <button [ngClass]="{'active': filter === 'all'}" (click)="filter='all'">All</button>
+    <button [ngClass]="{'active': filter === 'active'}" (click)="filter='active'">Active</button>
+    <button [ngClass]="{'active': filter === 'completed'}" (click)="filter='completed'">Completed</button>
+  </div>
+
+  <div *ngIf="atLeastOneDone()">
+    <button (click)="clearDone()">Clear Completed</button>
+  </div>
+
+</div>

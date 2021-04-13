@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Project4.Models;
+using Project4.Services;
 
 namespace Project4
 {
@@ -26,6 +28,13 @@ namespace Project4
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<ITodoService>(new TodoService());
+
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Todo API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +50,9 @@ namespace Project4
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
