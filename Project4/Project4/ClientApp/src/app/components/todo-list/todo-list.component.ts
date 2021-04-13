@@ -28,7 +28,6 @@ export class TodoListComponent implements OnInit {
   todoTask: string;
   todos: Todo[];
 
-
   constructor() { }
 
   ngOnInit() {
@@ -36,130 +35,10 @@ export class TodoListComponent implements OnInit {
     this.todoTask = '';
     this.filter = 'all';
     this.todoId = 16;
-    this.todos = [
-      {
-        'id': 1,
-        //'tags': 'Enterprise Programming',
-        'task': 'Project 4',
-        'due': '2021-04-13T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 2,
-        //'tagName': 'Ethics of Computing',
-        'task': 'Quiz 5',
-        'due': '2021-04-19T13:00:00Z',
-        'done': false,
-      },
-      {
-        'id': 3,
-        //'tagName': 'Concepts of AI',
-        'task': 'Biweekly Report',
-        'due': '2021-04-22T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 4,
-        //'tagName': 'Ethics of Computing',
-        'task': 'Quiz 6',
-        'due': '2021-04-26T13:00:00Z',
-        'done': false,
-      },
-      {
-        'id': 5,
-        //'tagName': 'Operating Systems',
-        'task': 'task 2',
-        'due': '2021-04-26T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 6,
-        //'tagName': 'Enterprise Programming',
-        'task': 'Final Project',
-        'due': '2021-04-27T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 7,
-        //'tagName': 'Networks',
-        'task': 'task 4',
-        'due': '2021-04-28T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 8,
-        //'tagName': 'Concepts of AI',
-        'task': 'Biweekly Report',
-        'due': '2021-04-29T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 9,
-        //'tagName': 'Enterprise Programming',
-        'task': 'Optional Project',
-        'due': '2021-05-01T23:59:59Z',
-        'done': false,
-      },
-      {
-        'id': 910,
-        //'tagName': 'Ethics of Computing',
-        'task': 'Project',
-        'due': '2021-05-03T13:00:00Z',
-        'done': false,
-      },
-      {
-        'id': 11,
-        //'tagName': 'Concepts of AI',
-        'task': 'Final Exam',
-        'due': '2021-05-04T19:30:00Z',
-        'done': false,
-      },
-      {
-        'id': 12,
-        //'tagName': 'Enterprise Programming',
-        'task': 'Final Exam',
-        'due': '2021-05-04T09:00:00Z',
-        'done': false,
-      },
-      {
-        'id': 13,
-        //'tagName': 'Networks',
-        'task': 'Final Exam',
-        'due': '2021-05-05T17:30:00Z',
-        'done': false,
-      },
-      {
-        'id': 14,
-        //'tagName': 'Theory of Computing',
-        'task': 'Final Exam',
-        'due': '2021-05-06T17:30:00Z',
-        'done': false,
-      },
-      {
-        'id': 15,
-        //'tagName': 'Operating Systems',
-        'task': 'Final Exam',
-        'due': '2021-05-07T15:00:00Z',
-        'done': false,
-      },
-    ];
   }
 
   addTodo(): void {
-    if (this.todoTask.trim().length === 0) {
-      return;
-    }
 
-    this.todos.push({
-      'id': this.todoId,
-      //'tagName': 'Operating Systems',
-      'task': this.todoTask,
-      'due': '2021-05-07T15:00:00Z',
-      'done': false,
-    });
-
-    this.todoTask = '';
-    ++this.todoId;
   }
 
   editTodo(todo: Todo): void {

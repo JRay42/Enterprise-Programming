@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,10 @@ namespace Project4
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddSingleton<ITodoService>(new TodoService());
+            services.AddTransient<ITodoService, TodoService>();
+
+            var connectionString = Configuration["TodoConnectionString"];
+            services.AddDbContext<TodoDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddSwaggerGen(c => 
             {

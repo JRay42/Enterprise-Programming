@@ -23,35 +23,35 @@ namespace Project4.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Todo>>> Get()
         {
-            return Ok(this.todoService.Get());
+            return Ok(await this.todoService.Get());
         }
 
         // GET api/<TodoController>/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Todo>> Get(int id)
-        //{
-        //    return Ok(await this.todoService.GetById(id));
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Todo>> Get(int id)
+        {
+            return Ok(await this.todoService.GetById(id));
+        }
 
         // POST api/<TodoController>
         [HttpPost]
         public async Task<ActionResult<Todo>> Post([FromBody] Todo todo)
         {
-            return Ok(this.todoService.Create(todo));
+            return Ok(await this.todoService.Create(todo));
         }
 
         // PUT api/<TodoController>
         [HttpPut()]
         public async Task<ActionResult<Todo>> Put([FromBody] Todo todo)
         {
-            return Ok(this.todoService.Update(todo));
+            return Ok(await this.todoService.Update(todo));
         }
 
         // DELETE api/<TodoController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
-            return Ok(this.todoService.Delete(id));
+            return Ok(await this.todoService.Delete(id));
         }
     }
 }

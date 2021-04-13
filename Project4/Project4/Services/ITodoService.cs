@@ -8,9 +8,16 @@ namespace Project4.Services
 {
     public interface ITodoService
     {
-        IEnumerable<Todo> Get();
-        Todo Create(Todo todo);
-        Todo Update(Todo todo);
-        bool Delete(int id);
+        
+        Task<IEnumerable<Todo>> Get();
+        
+        Task<Todo> GetById(int id);
+        
+        Task<Todo> Create(Todo todo);
+        
+        Task<Todo> Update(Todo todo);
+        
+        Task<bool> Delete(int id);
+
     }
 }

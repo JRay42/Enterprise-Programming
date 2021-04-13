@@ -1,5 +1,5 @@
-﻿using Project4.Models;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Project4.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,34 +8,48 @@ namespace Project4.Services
 {
     public class TodoService : ITodoService
     {
-        private IList<Todo> todos;
+        private TodoDbContext context;
 
-        public TodoService() 
+        public TodoService(TodoDbContext context) 
         {
-            this.todos = new List<Todo>();
+            this.context = context;
         }
-        public Todo Create(Todo todo)
+        public async Task<Todo> Create(Todo todo)
         {
-            this.todos.Add(todo);
+            this.context.Todos.Add(todo);
+            await this.context.SaveChangesAsync();
             return todo;
         }
 
-        public bool Delete(int id)
+        public async Task<Todo> GetById(int id)
         {
-            bool result = this.todos.Remove(this.todos.FirstOrDefault(td => td.ID == id));
-            return result;
-        }
-
-        public IEnumerable<Todo> Get()
-        {
-            return this.todos; 
-        }
-
-        public Todo Update(Todo todo)
-        {
-            Delete(todo.ID);
-            todo = Create(todo);
+            var todo = this.context.Todos.Include(t => t.Tags).FirstOrDefault<Todo>(t => t.ID == id);
             return todo;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            this.context.Todos.Remove(await GetById(id));
+            await this.context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<IEnumerable<Todo>> Get()
+        {
+            return await this.context.Todos.Include(t => t.Tags).ToListAsync<Todo>();
+        }
+
+        public async Task<Todo> Update(Todo todo)
+        {
+            var todoToUpdate = await GetById(todo.ID);
+            todoToUpdate.Task = todo.Task;
+            todoToUpdate.Tags.Clear();
+            foreach (TodoTags tag in todo.Tags) 
+            {
+                todoToUpdate.Tags.Add(tag);
+            }
+            this.context.SaveChangesAsync();
+            return todoToUpdate;
         }
     }
 }

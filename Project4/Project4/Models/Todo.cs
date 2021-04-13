@@ -8,7 +8,9 @@ namespace Project4.Models
     public class Todo
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string[] Todos {get; set;}
+        public IList<TodoTags> Tags {get; set;}
+        public string Task { get; set; }
+        public DateTime Due { get; set; }
+        public bool Done { get; set; }
     }
 }
