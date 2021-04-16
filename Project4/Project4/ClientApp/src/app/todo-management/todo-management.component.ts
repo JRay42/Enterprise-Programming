@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DataTableDirective } from 'angular-datatables';
+import { TodoSettingsComponent } from '../todo-settings/todo-settings.component';
 
 @Component({
   selector: 'app-todo-management',
@@ -26,6 +27,7 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
   faTrashAlt = faTrashAlt;
   pastDue: boolean;
   immanentlyDue: boolean;
+  warningDays: number;
 
   filter: string;
   public todos: TodoCustom[];
@@ -45,9 +47,10 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 20,
       processing: true
     };
+    this.warningDays = 4;
   }
 
   rerender(): void {
@@ -74,12 +77,16 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
     });
   }
 
-  settings() {
-
+  settings(today: Date) {
+    this.modalService.open(TodoSettingsComponent).result.then(() => {
+      this.get();
+    });
   }
 
-  edit(id: number) {
-    this.modalService.open(TodoEditComponent).result.then(() => {
+  edit(todo: TodoCustom) {
+    const modal = this.modalService.open(TodoEditComponent);
+    modal.componentInstance.setTodo(todo);
+    modal.result.then(() => {
       this.get();
     });
   }
@@ -103,13 +110,14 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
   }
 
   isPastDue(todo: TodoCustom) {
-    this.pastDue = todo.due <= this.today;
+    this.pastDue = todo.due <= new Date();
     return this.pastDue;
   }
 
   isImmanentlyDue(todo: TodoCustom) {
+    this.today = new Date();
+    this.today.setDate(this.today.getDate() + this.warningDays);
     this.immanentlyDue = todo.due <= this.today;
     return this.immanentlyDue;
   }
-
 }

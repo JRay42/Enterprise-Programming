@@ -43,6 +43,7 @@ namespace Project4.Services
         {
             var todoToUpdate = await GetById(todo.ID);
             todoToUpdate.Task = todo.Task;
+            todoToUpdate.Due = todo.Due;
             todoToUpdate.Tags.Clear();
             foreach (TodoTags tag in todo.Tags) 
             {

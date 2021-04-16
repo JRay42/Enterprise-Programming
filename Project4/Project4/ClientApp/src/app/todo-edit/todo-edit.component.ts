@@ -3,8 +3,6 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal, NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TodoCustom } from '../todo-management/todo-custom';
 import { TodoManagementService } from '../todo-management/todo-management.service';
-import * as moment from 'moment';
-import { TodoTagCustom } from '../todo-management/todo-tag-custom';
 
 @Component({
   selector: 'app-todo-edit',
@@ -21,20 +19,20 @@ export class TodoEditComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private mgmtService: TodoManagementService) { }
 
   ngOnInit() {
-    this.todo = new TodoCustom();
-    this.todo.tags = [];
-    this.todo.id = 1 ;
-    this.todo.tags[0] = new TodoTagCustom();
-    this.dueTime = { hour: 12, minute: 30, second: 0 };
+  }
+
+  public setTodo(todo: TodoCustom) {
+    this.todo = todo;
+    this.dueDate = { year: this.todo.due.getFullYear(), month: this.todo.due.getMonth(), day: this.todo.due.getDate() };
+    this.dueTime = { hour: this.todo.due.getHours(), minute: this.todo.due.getMinutes(), second: this.todo.due.getSeconds() };
+    console.log(this.todo)
   }
 
   save() {
-    const date = moment(this.dueDate);
-    date.hours(this.dueTime.hour);
-    date.minutes(this.dueTime.minute);
-    date.seconds(this.dueTime.second);
-    const utcDate = date.utc();
-    this.todo.due = utcDate.toDate();
+    this.todo.due.setHours(this.dueTime.hour);
+    this.todo.due.setMinutes(this.dueTime.minute);
+    this.todo.due.setSeconds(this.dueTime.second);
+    this.todo.due.setFullYear(this.dueDate.year, this.dueDate.month, this.dueDate.day);
     this.mgmtService.editTodo(this.todo).subscribe(
       () => {
         this.activeModal.close();
