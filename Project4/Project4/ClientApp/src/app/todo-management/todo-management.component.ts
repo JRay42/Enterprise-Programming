@@ -50,7 +50,7 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
       pageLength: 20,
       processing: true
     };
-    this.warningDays = 4;
+    this.warningDays = 2;
   }
 
   rerender(): void {
