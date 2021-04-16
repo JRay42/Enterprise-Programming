@@ -7,11 +7,11 @@ import * as moment from 'moment';
 import { TodoTagCustom } from '../todo-management/todo-tag-custom';
 
 @Component({
-  selector: 'app-todo-edit',
-  templateUrl: './todo-edit.component.html',
-  styleUrls: ['./todo-edit.component.css']
+  selector: 'app-todo-add',
+  templateUrl: './todo-add.component.html',
+  styleUrls: ['./todo-add.component.css']
 })
-export class TodoEditComponent implements OnInit {
+export class TodoAddComponent implements OnInit {
 
   faCalendar = faCalendar;
   dueDate: NgbDateStruct;
@@ -23,7 +23,6 @@ export class TodoEditComponent implements OnInit {
   ngOnInit() {
     this.todo = new TodoCustom();
     this.todo.tags = [];
-    this.todo.id = 1 ;
     this.todo.tags[0] = new TodoTagCustom();
     this.dueTime = { hour: 12, minute: 30, second: 0 };
   }
@@ -35,7 +34,7 @@ export class TodoEditComponent implements OnInit {
     date.seconds(this.dueTime.second);
     const utcDate = date.utc();
     this.todo.due = utcDate.toDate();
-    this.mgmtService.editTodo(this.todo).subscribe(
+    this.mgmtService.save(this.todo).subscribe(
       () => {
         this.activeModal.close();
       }

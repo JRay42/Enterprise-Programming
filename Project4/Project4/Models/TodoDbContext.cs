@@ -139,103 +139,103 @@ namespace Project4.Models
                 new TodoTags
                 {
                     ID = 1,
-                    Tags = "UCO - CS",
+                    Tag = "UCO - CS",
                     TodoID = 1
                 },
                 new TodoTags
                 {
                     ID = 2,
-                    Tags = "Concepts of AI",
+                    Tag = "Concepts of AI",
                     TodoID = 1
                 },
                 new TodoTags
                 {
                     ID = 3,
-                    Tags = "Enterprise Programming",
+                    Tag = "Enterprise Programming",
                     TodoID = 2
                 },
                 new TodoTags
                 {
                     ID = 4,
-                    Tags = "Ethics of Computing",
+                    Tag = "Ethics of Computing",
                     TodoID = 3
                 },
                 new TodoTags
                 {
                     ID = 5,
-                    Tags = "Concepts of AI",
+                    Tag = "Concepts of AI",
                     TodoID = 4
                 },
                 new TodoTags
                 {
                     ID = 6,
-                    Tags = "Ethics of Computing",
+                    Tag = "Ethics of Computing",
                     TodoID = 5
                 },
                 new TodoTags
                 {
                     ID = 7,
-                    Tags = "Operating Systems",
+                    Tag = "Operating Systems",
                     TodoID = 6
                 },
                 new TodoTags
                 {
                     ID = 8,
-                    Tags = "Enterprise Programming",
+                    Tag = "Enterprise Programming",
                     TodoID = 7
                 },
                 new TodoTags
                 {
                     ID = 9,
-                    Tags = "Networks",
+                    Tag = "Networks",
                     TodoID = 8
                 },
                 new TodoTags
                 {
                     ID = 10,
-                    Tags = "Concepts of AI",
+                    Tag = "Concepts of AI",
                     TodoID = 9
                 },
                 new TodoTags
                 {
                     ID = 11,
-                    Tags = "Enterprise Programming",
+                    Tag = "Enterprise Programming",
                     TodoID = 10
                 },
                 new TodoTags
                 {
                     ID = 12,
-                    Tags = "Ethics of Computing",
+                    Tag = "Ethics of Computing",
                     TodoID = 11
                 },
                 new TodoTags
                 {
                     ID = 13,
-                    Tags = "Concepts of AI",
+                    Tag = "Concepts of AI",
                     TodoID = 12
                 },
                 new TodoTags
                 {
                     ID = 14,
-                    Tags = "Enterprise Programming",
+                    Tag = "Enterprise Programming",
                     TodoID = 13
                 },
                 new TodoTags
                 {
                     ID = 15,
-                    Tags = "Networks",
+                    Tag = "Networks",
                     TodoID = 14
                 },
                 new TodoTags
                 {
                     ID = 16,
-                    Tags = "Theory of Computing",
+                    Tag = "Theory of Computing",
                     TodoID = 15
                 },
                 new TodoTags
                 {
                     ID = 17,
-                    Tags = "Operating Systems",
+                    Tag = "Operating Systems",
                     TodoID = 16
                 });
             

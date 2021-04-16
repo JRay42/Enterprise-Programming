@@ -4,6 +4,6 @@ export class Todo {
   id: number;
   // tags: TodoTags[];
   task: string;
-  due: string;
+  due: Date;
   done: boolean;
 }
