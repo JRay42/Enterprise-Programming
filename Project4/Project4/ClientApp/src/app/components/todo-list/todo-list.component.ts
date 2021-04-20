@@ -33,7 +33,7 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
     this.preEditCache = '';
     this.todoTask = '';
-    this.filter = 'all';
+    this.filter = 'active';
     this.todoId = 16;
   }
 
