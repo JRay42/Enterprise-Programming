@@ -12,5 +12,6 @@ namespace Final.Models
         public string Task { get; set; }
         public DateTime Due { get; set; }
         public bool Done { get; set; }
+        public string Owner { get; set; }
     }
 }

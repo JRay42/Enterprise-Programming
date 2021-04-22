@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Final.Models;
 using Final.Services;
 using System;
@@ -12,6 +13,7 @@ namespace Final.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TodoController : ControllerBase
     {
         private ITodoService todoService;
@@ -23,7 +25,8 @@ namespace Final.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Todo>>> Get()
         {
-            return Ok(await this.todoService.Get());
+            var owner = this.User.Identity.Name;
+            return Ok(await this.todoService.Get(owner));
         }
 
         // GET api/<TodoController>/5

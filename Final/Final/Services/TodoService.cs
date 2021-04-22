@@ -34,9 +34,9 @@ namespace Final.Services
             return true;
         }
 
-        public async Task<IEnumerable<Todo>> Get()
+        public async Task<IEnumerable<Todo>> Get(string owner)
         {
-            return await this.context.Todos.Include(t => t.Tags).ToListAsync<Todo>();
+            return await this.context.Todos.Where(t => t.Owner == owner).Include(t => t.Tags).ToListAsync<Todo>();
         }
 
         public async Task<Todo> Update(Todo todo)

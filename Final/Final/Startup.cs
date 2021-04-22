@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Final.Models;
 using Final.Services;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace Final
 {
@@ -39,6 +40,29 @@ namespace Final
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Todo API", Version = "v1" });
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>(configuration => 
+            {
+                configuration.Password.RequireDigit = true;
+                configuration.Password.RequiredLength = 8;
+                configuration.Password.RequireUppercase = true;
+                configuration.Password.RequireLowercase = true;
+                configuration.Password.RequireNonAlphanumeric = true;
+                configuration.User.RequireUniqueEmail = false;
+                configuration.SignIn.RequireConfirmedAccount = false;
+                configuration.SignIn.RequireConfirmedEmail = false;
+            }).AddEntityFrameworkStores<TodoDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/user/login";
+                options.AccessDeniedPath = "/user/login";
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +90,9 @@ namespace Final
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -9,7 +9,7 @@ namespace Final.Services
     public interface ITodoService
     {
         
-        Task<IEnumerable<Todo>> Get();
+        Task<IEnumerable<Todo>> Get(string owner);
         
         Task<Todo> GetById(int id);
         
