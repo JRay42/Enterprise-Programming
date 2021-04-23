@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Final.Models;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Final.Controllers
 {
@@ -45,7 +46,9 @@ namespace Final.Controllers
             }
             else
             {
-                return BadRequest();
+                var errors = new List<Error>();
+                errors.Add(new Error() { description = "Invalid credentials." });
+                return BadRequest(errors);
             }
         }
     }

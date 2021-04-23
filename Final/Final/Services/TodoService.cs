@@ -3,6 +3,7 @@ using Final.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace Final.Services
 {
@@ -21,15 +22,16 @@ namespace Final.Services
             return todo;
         }
 
-        public async Task<Todo> GetById(int id)
+        public async Task<Todo> GetById(int id, string owner)
         {
-            var todo = this.context.Todos.Include(t => t.Tags).FirstOrDefault<Todo>(t => t.ID == id);
+            var todo = this.context.Todos.Where(t => t.Owner == owner).Include(t => t.Tags).FirstOrDefault<Todo>(t => t.ID == id);
+            if (todo == null) throw new Exception();
             return todo;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id, string owner)
         {
-            this.context.Todos.Remove(await GetById(id));
+            this.context.Todos.Remove(await GetById(id, owner));
             await this.context.SaveChangesAsync();
             return true;
         }
@@ -41,7 +43,7 @@ namespace Final.Services
 
         public async Task<Todo> Update(Todo todo)
         {
-            var todoToUpdate = await GetById(todo.ID);
+            var todoToUpdate = await GetById(todo.ID, todo.Owner);
             todoToUpdate.Task = todo.Task;
             todoToUpdate.Due = todo.Due;
             todoToUpdate.Tags.Clear();
@@ -49,7 +51,7 @@ namespace Final.Services
             {
                 todoToUpdate.Tags.Add(tag);
             }
-            this.context.SaveChangesAsync();
+            await this.context.SaveChangesAsync();
             return todoToUpdate;
         }
     }

@@ -33,13 +33,16 @@ namespace Final.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Todo>> Get(int id)
         {
-            return Ok(await this.todoService.GetById(id));
+            var owner = this.User.Identity.Name;
+            return Ok(await this.todoService.GetById(id, owner));
         }
 
         // POST api/<TodoController>
         [HttpPost]
         public async Task<ActionResult<Todo>> Post([FromBody] Todo todo)
         {
+            var owner = this.User.Identity.Name;
+            todo.Owner = owner;
             return Ok(await this.todoService.Create(todo));
         }
 
@@ -47,6 +50,8 @@ namespace Final.Controllers
         [HttpPut()]
         public async Task<ActionResult<Todo>> Put([FromBody] Todo todo)
         {
+            var owner = this.User.Identity.Name;
+            todo.Owner = owner;
             return Ok(await this.todoService.Update(todo));
         }
 
@@ -54,7 +59,8 @@ namespace Final.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
-            return Ok(await this.todoService.Delete(id));
+            var owner = this.User.Identity.Name;
+            return Ok(await this.todoService.Delete(id, owner));
         }
     }
 }

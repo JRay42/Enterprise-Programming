@@ -32,6 +32,7 @@ namespace Final
             });
 
             services.AddTransient<ITodoService, TodoService>();
+            services.AddTransient<ISettingsService, SettingsService>();
 
             var connectionString = Configuration["TodoConnectionString"];
             services.AddDbContext<TodoDbContext>(options => options.UseSqlServer(connectionString));

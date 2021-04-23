@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DataTableDirective } from 'angular-datatables';
 import { TodoSettingsComponent } from '../todo-settings/todo-settings.component';
+import { SettingsManagementService } from '../todo-settings/settings.service';
+import { TodoSettings } from '../todo-settings/todo-settings';
 
 @Component({
   selector: 'app-todo-management',
@@ -26,13 +28,13 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
   faTrashAlt = faTrashAlt;
   pastDue: boolean;
   immanentlyDue: boolean;
-  warningDays: number;
 
   filter: string;
   public todos: TodoCustom[];
+  public todoSettings: TodoSettings;
   today: Date;
 
-  constructor(private http: HttpClient, private mgmtService: TodoManagementService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private mgmtService: TodoManagementService, private modalService: NgbModal, private settingsmgmtService: SettingsManagementService) { }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -51,7 +53,7 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
     };
     this.get();
     this.filter = 'active';
-    this.warningDays = 2;
+    this.getSettings();
   }
 
   rerender(): void {
@@ -72,6 +74,14 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
     );
   }
 
+  getSettings() {
+    this.settingsmgmtService.get().subscribe(
+      (todoSettings) => {
+        this.todoSettings = todoSettings;
+      }
+    );
+  }
+
   add() {
     this.modalService.open(TodoAddComponent).result.then(() => {
       this.get();
@@ -81,6 +91,7 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
   settings(today: Date) {
     this.modalService.open(TodoSettingsComponent).result.then(() => {
       this.get();
+      this.getSettings();
     });
   }
 
@@ -107,6 +118,10 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
       return this.todos.filter(todo => todo.done);
     }
 
+    setTimeout(() => {
+      this.rerender();
+    }, 10);
+
     return this.todos;
   }
 
@@ -117,7 +132,7 @@ export class TodoManagementComponent implements AfterViewInit, OnInit, OnDestroy
 
   isImmanentlyDue(todo: TodoCustom) {
     this.today = new Date();
-    this.today.setDate(this.today.getDate() + this.warningDays);
+    this.today.setDate(this.today.getDate() + this.todoSettings.warningSetting);
     this.immanentlyDue = todo.due <= this.today;
     return this.immanentlyDue;
   }

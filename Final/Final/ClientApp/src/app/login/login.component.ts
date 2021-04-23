@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     this.loginService.login(this.userCredentials).subscribe(() => {
-      this.router.navigate(['/admin/todo'])
+      this.router.navigate(['/todo'])
     },
       (error) => {
         this.errorMessage = error;

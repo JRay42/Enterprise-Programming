@@ -41,7 +41,7 @@ import { TodoSettingsComponent } from './todo-settings/todo-settings.component';
     RouterModule.forRoot([
       { path: '', component: TodoManagementComponent, pathMatch: "full", canActivate: [AuthGuard] },
       { path: 'settings', component: TodoSettingsComponent, canActivate: [AuthGuard]  },
-      { path: 'admin/todo', component: TodoManagementComponent },
+      { path: 'todo', component: TodoManagementComponent },
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
     ])

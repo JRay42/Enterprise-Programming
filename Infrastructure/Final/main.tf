@@ -21,7 +21,7 @@ resource "azurerm_app_service_plan" "finalexample" {
 }
 
 resource "azurerm_app_service" "finalexample" {
-  name                = "final-app-service-jray"
+  name                = "final-app-service-jray"		#CHANGEME
   location            = azurerm_resource_group.final.location
   resource_group_name = azurerm_resource_group.final.name
   app_service_plan_id = azurerm_app_service_plan.finalexample.id
@@ -35,16 +35,16 @@ resource "azurerm_app_service" "finalexample" {
 }
 
 resource "azurerm_sql_server" "final" {
-  name                         = "final-sqlserver-jray"
+  name                         = "final-sqlserver-jray" 	#CHANGEME
   resource_group_name          = azurerm_resource_group.final.name
   location                     = "Central US"
   version                      = "12.0"
-  administrator_login          = "jray22"
-  administrator_login_password = "Abcde12345"
+  administrator_login          = "jray22"			#CHANGEME
+  administrator_login_password = "Abcde12345"			#CHANGEME
 }
 
 resource "azurerm_sql_database" "final" {
-  name                = "jray22TodoApp"
+  name                = "jray22TodoApp"				#CHANGEME
   resource_group_name = azurerm_resource_group.final.name
   location            = "Central US"
   server_name         = azurerm_sql_server.final.name

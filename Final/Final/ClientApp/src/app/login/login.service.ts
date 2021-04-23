@@ -66,7 +66,8 @@ export class LoginService {
       }
     }
     // return an observable with a user-facing error message
-    return throwError("Invalid credentials, please try again.");
+    return throwError(error.error[0].description);
   }
-
 }
+// [{"code":"DuplicateUserName","description":"Username 'jray22' is already taken."}]
+// {"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"Bad Request","status":400,"traceId":"00-e84b3d4ccbfadf4398d1497703f38e65-c5ff11dfa3305044-00"}

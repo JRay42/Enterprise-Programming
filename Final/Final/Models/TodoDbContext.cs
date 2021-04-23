@@ -21,6 +21,13 @@ namespace Final.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TodoWarningSetting>().HasData(
+                new TodoWarningSetting
+                {
+                    ID = 1,
+                    WarningSetting = 2
+                }
+            );
             modelBuilder.Entity<Todo>().HasData(
                 new Todo
                 {
@@ -325,17 +332,10 @@ namespace Final.Models
                     TodoID = 21
                 }
             );
-            //modelBuilder.Entity<TodoUserLogin>().HasData(
-            //    new TodoUserLogin
-            //    {
-            //        UserName = "jray22",
-            //        Password = "Abcde12345!"
-            //    }
-            //);
         }
 
         public DbSet<Todo> Todos { get; set; }
         public DbSet<TodoTags> TodoTags { get; set; }
-        //public DbSet<TodoUserLogin> TodoUserLogins { get; set; }
+        public DbSet<TodoWarningSetting> TodoWarningSettings { get; set; }
     }
 }

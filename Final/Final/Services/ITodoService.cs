@@ -8,16 +8,10 @@ namespace Final.Services
 {
     public interface ITodoService
     {
-        
         Task<IEnumerable<Todo>> Get(string owner);
-        
-        Task<Todo> GetById(int id);
-        
+        Task<Todo> GetById(int id, string owner);
         Task<Todo> Create(Todo todo);
-        
         Task<Todo> Update(Todo todo);
-        
-        Task<bool> Delete(int id);
-
+        Task<bool> Delete(int id, string owner);
     }
 }

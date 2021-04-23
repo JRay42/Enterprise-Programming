@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { TodoManagementService } from '../todo-management/todo-management.service';
+import { SettingsManagementService } from './settings.service';
+import { TodoSettings } from './todo-settings';
 
 @Component({
   selector: 'app-todo-settings',
@@ -13,13 +14,26 @@ export class TodoSettingsComponent implements OnInit {
   today: Date;
   warningDays: number;
 
-  constructor(public activeModal: NgbActiveModal, private mgmtService: TodoManagementService) { }
+  public todoSettings: TodoSettings;
+
+  constructor(public activeModal: NgbActiveModal, private mgmtService: SettingsManagementService) { }
 
   ngOnInit() {
+    this.get();
   }
 
   save() {
-    this.activeModal.close();
-    return this.warningDays;
+    this.mgmtService.editSettings(this.todoSettings).subscribe((response: any) => {
+      this.get();
+      this.activeModal.close();
+    });
+  }
+
+  get() {
+    this.mgmtService.get().subscribe(
+      (todoSettings) => {
+        this.todoSettings = todoSettings;
+      }
+    );
   }
 }

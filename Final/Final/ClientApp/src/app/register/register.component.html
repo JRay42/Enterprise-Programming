@@ -24,13 +24,7 @@
             <label class="text-danger" *ngIf="signupForm.controls['userName'].hasError('required')">
               Input a User Name
             </label>
-
-
-            <!-- <label class="text-danger" *ngIf="signupForm.controls['userName'].hasError('required')">
-              User Name Already Exists, Please Try a Different One
-            </label> -->
-
-
+            <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
           </div>
           <div class="form-group">
             <label for="password" [ngClass]="signupForm.controls['password'].invalid ? 'text-danger' : ''">Password:</label>
