@@ -44,7 +44,7 @@ resource "azurerm_sql_server" "final" {
 }
 
 resource "azurerm_sql_database" "final" {
-  name                = "jray22TodoApp"				#CHANGEME
+  name                = "jray22TodoAppFinal"			#CHANGEME
   resource_group_name = azurerm_resource_group.final.name
   location            = "Central US"
   server_name         = azurerm_sql_server.final.name
